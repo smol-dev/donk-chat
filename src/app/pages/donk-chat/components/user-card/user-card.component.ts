@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UiUser } from '../../../services/twitch.service';
+import { UiUser } from 'src/app/pages/services/models';
 
 @Component({
   selector: 'app-user-card',

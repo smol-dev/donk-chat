@@ -16,9 +16,10 @@ import {
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ChatCardComponent } from './components/chat-card/chat-card.component';
 
 @NgModule({
-  declarations: [DonkChatComponent, UserCardComponent],
+  declarations: [DonkChatComponent, UserCardComponent, ChatCardComponent],
   imports: [
     CommonModule,
     DonkChatRoutingModule,
