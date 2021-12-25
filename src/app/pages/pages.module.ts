@@ -3,17 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
-import { NbLayoutModule } from '@nebular/theme';
-
+import {
+  NbActionsModule,
+  NbLayoutModule,
+  NbRouteTabsetModule,
+  NbTableModule,
+} from '@nebular/theme';
 
 @NgModule({
-  declarations: [
-    PagesComponent
-  ],
-  imports: [
-    NbLayoutModule,
-    CommonModule,
-    PagesRoutingModule
-  ]
+  declarations: [PagesComponent],
+  imports: [NbLayoutModule, NbActionsModule, CommonModule, PagesRoutingModule],
 })
-export class PagesModule { }
+export class PagesModule {}

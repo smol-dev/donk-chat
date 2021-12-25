@@ -7,14 +7,15 @@ const routes: Routes = [
     path: '',
     component: PagesComponent,
     children: [
-      // {
-      //   path: 'feature',
-      //   loadChildren: () =>
-      //     import('./feature/feature.module').then((m) => m.FeatrueModule),
-      // },
+      {
+        path: 'donk-chat',
+        loadChildren: () =>
+          import('./donk-chat/donk-chat.module').then((m) => m.DonkChatModule),
+      },
+
       // {
       //   path: '',
-      //   redirectTo: 'feature',
+      //   redirectTo: 'donk-chat',
       //   pathMatch: 'full',
       // },
       // {

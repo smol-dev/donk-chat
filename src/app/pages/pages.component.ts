@@ -5,7 +5,13 @@ import { Component, OnInit } from '@angular/core';
   template: `
     <nb-layout>
       <nb-layout-header fixed>
-        <h2>Helo</h2>
+        <nb-actions size="small">
+          <nb-action
+            class="control-item"
+            icon="email-outline"
+            [link]="'donk-chat'"
+          ></nb-action>
+        </nb-actions>
       </nb-layout-header>
 
       <nb-layout-column>
@@ -19,6 +25,14 @@ import { Component, OnInit } from '@angular/core';
   `,
 })
 export class PagesComponent implements OnInit {
+  tabs = [
+    {
+      title: 'donk-chat',
+      route: '/pages/donk-chat',
+      icon: 'message-circle-outline',
+      responsive: true,
+    },
+  ];
   constructor() {}
 
   ngOnInit(): void {}
