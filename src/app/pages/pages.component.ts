@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NbSearchService } from '@nebular/theme';
+import { StoreService } from './services/store.service';
 
 @Component({
   selector: 'app-pages',
@@ -12,6 +14,7 @@ import { Component, OnInit } from '@angular/core';
             [link]="'donk-chat'"
           ></nb-action>
         </nb-actions>
+        <nb-search type="rotate-layout"></nb-search>
       </nb-layout-header>
 
       <nb-layout-column>
@@ -33,7 +36,13 @@ export class PagesComponent implements OnInit {
       responsive: true,
     },
   ];
-  constructor() {}
+  constructor(private searchService: NbSearchService, store: StoreService) {
+    this.searchService
+      .onSearchSubmit()
+      .subscribe((data: { term: string; tag?: string }) => {
+        store.searchTerm$.next(data.term);
+      });
+  }
 
   ngOnInit(): void {}
 }

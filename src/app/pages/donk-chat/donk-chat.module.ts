@@ -6,20 +6,29 @@ import { DonkChatComponent } from './donk-chat.component';
 
 import {
   NbAutocompleteModule,
+  NbButtonModule,
   NbCardModule,
   NbFormFieldModule,
+  NbInputModule,
+  NbSearchModule,
   NbSelectModule,
 } from '@nebular/theme';
+import { UserCardComponent } from './components/user-card/user-card.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
-  declarations: [DonkChatComponent],
+  declarations: [DonkChatComponent, UserCardComponent],
   imports: [
     CommonModule,
     DonkChatRoutingModule,
+    ReactiveFormsModule,
+    NbButtonModule,
     NbCardModule,
     NbFormFieldModule,
-    NbSelectModule,
-    NbAutocompleteModule,
+    NbInputModule,
+    FlexLayoutModule,
+    NbSearchModule
   ],
 })
 export class DonkChatModule {}

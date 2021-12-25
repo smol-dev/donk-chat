@@ -7,11 +7,18 @@ import {
   NbActionsModule,
   NbLayoutModule,
   NbRouteTabsetModule,
+  NbSearchModule,
   NbTableModule,
 } from '@nebular/theme';
 
 @NgModule({
   declarations: [PagesComponent],
-  imports: [NbLayoutModule, NbActionsModule, CommonModule, PagesRoutingModule],
+  imports: [
+    NbLayoutModule,
+    NbActionsModule,
+    CommonModule,
+    PagesRoutingModule,
+    NbSearchModule,
+  ],
 })
 export class PagesModule {}

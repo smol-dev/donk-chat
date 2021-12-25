@@ -1,0 +1,17 @@
+<main
+  fxLayout="row"
+  fxLayoutGap="2rem"
+  [style.background]="'url(' + streamer!.offlinePlaceholderUrl + ')'"
+>
+  <img [src]="streamer?.profilePictureUrl" />
+
+  <h2 fxFlexAlign="center">{{ streamer?.displayName | titlecase }}</h2>
+</main>
+
+<section>
+  <nb-card>
+    <nb-card-body>
+      <pre>YOUR MOMOMMOOMOM</pre>
+    </nb-card-body>
+  </nb-card>
+</section>
