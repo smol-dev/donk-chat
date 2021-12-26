@@ -17,9 +17,15 @@ import { UserCardComponent } from './components/user-card/user-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChatCardComponent } from './components/chat-card/chat-card.component';
+import { EmoteComponent } from './components/emote/emote.component';
 
 @NgModule({
-  declarations: [DonkChatComponent, UserCardComponent, ChatCardComponent],
+  declarations: [
+    DonkChatComponent,
+    UserCardComponent,
+    ChatCardComponent,
+    EmoteComponent,
+  ],
   imports: [
     CommonModule,
     DonkChatRoutingModule,
@@ -29,7 +35,10 @@ import { ChatCardComponent } from './components/chat-card/chat-card.component';
     NbFormFieldModule,
     NbInputModule,
     FlexLayoutModule,
-    NbSearchModule
+    NbSearchModule,
+    NbInputModule,
+    NbAutocompleteModule,
+    NbAutocompleteModule,
   ],
 })
 export class DonkChatModule {}

@@ -1,54 +1,34 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, Observable, of } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ClientCredentialsAuthProvider } from '@twurple/auth';
 import { ApiClient, HelixUser } from '@twurple/api';
-import { ChatClient } from '@twurple/chat';
-import { UiUser } from './models';
+import { UiUser } from '../models/models';
 
 const clientId = 'ti1zdur1zl1qho6j27fctfea04u39k';
 const clientSecret = 'sopr4t4g8rt3heui6ploici5cz4f82';
 
-const authProvider = new ClientCredentialsAuthProvider(clientId, clientSecret);
-const apiClient = new ApiClient({ authProvider });
 @Injectable({
   providedIn: 'root',
 })
 export class TwitchService {
-  username?: string;
-  chatClient? = new ChatClient();
-  messages: string[] = [];
+  authProvider = new ClientCredentialsAuthProvider(clientId, clientSecret);
+  apiClient: ApiClient;
 
-  constructor(private http: HttpClient) {}
+  constructor() {
+    this.apiClient = new ApiClient({ authProvider: this.authProvider });
+  }
 
   getUser(username: string): Observable<UiUser> {
-    this.username = username;
-    return from(apiClient.users.getUserByName(username)).pipe(
+    return from(this.apiClient.users.getUserByName(username)).pipe(
       map((user) => this.fromHelixToUiUser(user))
     );
   }
 
-  async connectToChat() {
-    if (this.username) {
-      this.chatClient = new ChatClient({
-        channels: [this.username],
-      });
-
-      await this.chatClient.connect();
-
-      // this.chatClient?.onMessage((channel, user, message) => {
-      //   console.log(message);
-
-      //   this.messages.push(message);
-      // });
-    }
-  }
-
   // helpers
   getUsers(users: string[]): Observable<UiUser[]> {
-    return from(apiClient.users.getUsersByIds(users)).pipe(
+    return from(this.apiClient.users.getUsersByIds(users)).pipe(
       map((users) => this.fromHelixToUiUserArray(users))
     );
   }

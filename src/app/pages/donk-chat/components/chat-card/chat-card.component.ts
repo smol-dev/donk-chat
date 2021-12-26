@@ -4,9 +4,7 @@ import {
   ChangeDetectionStrategy,
   Input,
 } from '@angular/core';
-import { UiUser } from 'src/app/pages/services/models';
-import { TwitchService } from 'src/app/pages/services/twitch.service';
-import { ChatClient } from '@twurple/chat';
+import { UiEmote, UiUser } from 'src/app/pages/models/models';
 
 @Component({
   selector: 'app-chat-card',
@@ -15,31 +13,18 @@ import { ChatClient } from '@twurple/chat';
 })
 export class ChatCardComponent implements OnInit {
   @Input() streamer?: UiUser;
-  chatClient = new ChatClient();
+  @Input() emotes?: Map<string, UiEmote>;
+  @Input() messages: string[] = [];
 
-  messages: string[] = [];
+  constructor() {}
 
-  constructor(private service: TwitchService) {
-    this.service.chatClient?.onMessage((channel, user, message) => {
-      this.messages.push(message);
-    });
+  loadChat() {
+    throw 'TOdo';
   }
 
-  async loadChat() {
-    console.log('loadChat');
-
-    if (this.streamer?.name) {
-      this.chatClient = new ChatClient({
-        channels: [this.streamer?.name],
-      });
-    }
-    await this.chatClient.connect();
-    this.chatClient.onMessage((channel, user, message) => {
-      console.log(message);
-
-      this.messages = [message, ...this.messages];
-    });
+  ngOnInit(): void {
+    console.log('emotes', this.emotes);
   }
 
-  ngOnInit(): void {}
+  getEmotes() {}
 }

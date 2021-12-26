@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UiUser } from 'src/app/pages/services/models';
+import { UiUser } from 'src/app/pages/models/models';
 
 @Component({
   selector: 'app-user-card',
