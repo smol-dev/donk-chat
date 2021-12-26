@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   Input,
 } from '@angular/core';
-import { UiEmote } from 'src/app/pages/models/models';
+import { UiEmote } from 'src/app/models/models';
 
 @Component({
   selector: 'app-emote',
@@ -16,7 +16,13 @@ import { UiEmote } from 'src/app/pages/models/models';
           [alt]="emote?.name"
         />
       </div>
-      <div *ngSwitchCase="'ffz'">ffz output</div>
+
+      <div *ngSwitchCase="'ffz'">
+        <img
+          src="https://cdn.frankerfacez.com/emote/{{ emote?.emote?.id }}/1"
+          [alt]="emote?.name"
+        />
+      </div>
       <div *ngSwitchCase="'7tv'">
         <img
           src="https://cdn.7tv.app/emote/{{ emote?.emote?.id }}/1x"
@@ -38,5 +44,7 @@ export class EmoteComponent implements OnInit {
   @Input() emote?: UiEmote;
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('emote', this.emote?.name);
+  }
 }

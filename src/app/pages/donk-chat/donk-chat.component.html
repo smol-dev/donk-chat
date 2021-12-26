@@ -1,14 +1,21 @@
-<nb-card *ngIf="store.streamer$ | async as streamer">
+<nb-card *ngIf="store.streamer$ | async as streamer" style="height: 100%;">
+  <nb-card-header>
+    <app-user-card [streamer]="streamer"></app-user-card>
+  </nb-card-header>
   <nb-card-body>
     <ng-container *ngIf="store.emoteMap$ | async as emotes">
-      <app-user-card [streamer]="streamer"></app-user-card>
-
-      <app-chat-card [streamer]="streamer" [emotes]="emotes"></app-chat-card>
+      <app-chat-card
+        [streamer]="streamer"
+        [emotes]="emotes"
+        [messages]="messages"
+      ></app-chat-card>
     </ng-container>
   </nb-card-body>
+
+  <nb-card-footer> </nb-card-footer>
 </nb-card>
 
-<nb-card>
+<!-- <nb-card>
   <nb-card-header fxLayout="row wrap" fxLayoutAlign="space-around center">
     <input
       #autoInput
@@ -34,4 +41,4 @@
   </nb-card-body>
 
   <ng-container ngSwitch="emote?.type"> </ng-container>
-</nb-card>
+</nb-card> -->

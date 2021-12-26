@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import {
-  Emoticon,
-  FFZResponse,
-  RoomEmotes,
-} from '../models/ffz.model';
+import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { Emoticon, FFZResponse, RoomEmotes } from '../models/ffz.model';
 import { Emote7Tv } from '../models/7tv.model';
 import { BttvResponse } from '../models/bttv.model';
 import { UiEmote } from '../models/models';
@@ -19,23 +15,7 @@ export const SEVENTV_URL = 'https://api.7tv.app/v2';
   providedIn: 'root',
 })
 export class EmoteService {
-  ffz$ = new BehaviorSubject<unknown>(null);
-  channel: any;
-  uid: any;
-
   constructor(private http: HttpClient) {
-    const emotes = [];
-
-    const ffzGlobal$ = this.http.get<FFZResponse>(`${FFZ_URL}/set/global`);
-    const bttvGlobal$ = this.http.get(`${BTTV_URL}/emotes/global`);
-    const bttv$ = this.http.get(`${BTTV_URL}/users/twitch/${this.uid}`);
-    const sevenTV$ = this.http.get(`${SEVENTV_URL}/users/${this.channel}`);
-    const sevenTVGlobal = this.http.get(`${SEVENTV_URL}/emotes/global`);
-
-    console.log('constructor');
-
-    // ffz$.subscribe((ffz) => this.ffz$.next(ffz));
-    // ffzGlobal$.subscribe((ffzGlobal) => console.log({ ffzGlobal }));
   }
 
   getFfz(channel: string): Observable<UiEmote[]> {
@@ -49,20 +29,34 @@ export class EmoteService {
         });
         return res;
       }),
-      map((res) => this.mapFfzEmotes(res))
+      map((res) => this.mapFfzEmotes(res)),
+      catchError((e) => {
+        console.warn(e);
+        return of([]);
+      })
     );
   }
 
   getSevenTv(channel: string): Observable<UiEmote[]> {
     return this.http
       .get<Emote7Tv[]>(`${SEVENTV_URL}/users/${channel}/emotes`)
-      .pipe(map((res) => this.map7tvEmotes(res)));
+      .pipe(
+        map((res) => this.map7tvEmotes(res)),
+        catchError((e) => {
+          console.warn(e);
+          return of([]);
+        })
+      );
   }
 
   getBttv(id: string): Observable<UiEmote[]> {
-    return this.http
-      .get<BttvResponse>(`${BTTV_URL}/users/twitch/${id}`)
-      .pipe(map((res) => this.mapBttvEmotes(res)));
+    return this.http.get<BttvResponse>(`${BTTV_URL}/users/twitch/${id}`).pipe(
+      map((res) => this.mapBttvEmotes(res)),
+      catchError((e) => {
+        console.warn(e);
+        return of([]);
+      })
+    );
   }
 
   mapBttvEmotes({ channelEmotes, sharedEmotes }: BttvResponse): UiEmote[] {

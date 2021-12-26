@@ -2,8 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChatClient } from '@twurple/chat';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UiEmote } from '../models/models';
-import { StoreService } from '../services/store.service';
+import { UiEmote, UiUser } from '../../models/models';
+import { StoreService } from '../../services/store.service';
 
 @Component({
   selector: 'page-donk-chat',
@@ -16,18 +16,15 @@ export class DonkChatComponent implements OnInit {
   filteredOptions$?: Observable<string[]>;
   @ViewChild('autoInput') input!: ElementRef;
   searchEmote = '';
+  messages: string[] = [];
 
   constructor(public store: StoreService) {
     this.store.streamer$.subscribe((streamer) => {
-      if (streamer?.name)
-        this.chatClient = new ChatClient({
-          channels: [streamer?.name],
-        });
-    });
-
-    this.store.emoteMap$.subscribe((emoteMap) => {
-      this.options = Array.from(emoteMap.keys());
-      this.filteredOptions$ = of(this.options);
+      if (streamer?.name) {
+        this.chatClient.quit();
+        this.messages = [];
+        this.loadChat(streamer);
+      }
     });
   }
 
@@ -56,4 +53,19 @@ export class DonkChatComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  async loadChat(streamer: UiUser) {
+    console.log('loadChat');
+
+    if (streamer?.name) {
+      this.chatClient = new ChatClient({
+        channels: [streamer?.name],
+      });
+    }
+    await this.chatClient.connect();
+
+    this.chatClient.onMessage((channel, user, message) => {
+      this.messages = [message, ...this.messages];
+    });
+  }
 }

@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   Input,
 } from '@angular/core';
-import { UiEmote, UiUser } from 'src/app/pages/models/models';
+import { UiEmote, UiUser } from 'src/app/models/models';
 
 @Component({
   selector: 'app-chat-card',
@@ -18,13 +18,13 @@ export class ChatCardComponent implements OnInit {
 
   constructor() {}
 
-  loadChat() {
-    throw 'TOdo';
-  }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    console.log('emotes', this.emotes);
+  getEmotes(message: string): UiEmote[] {
+    return ' '
+      .concat(message)
+      .split(' ')
+      .filter((word) => this.emotes?.has(word))
+      .map((word) => this.emotes?.get(word)!);
   }
-
-  getEmotes() {}
 }

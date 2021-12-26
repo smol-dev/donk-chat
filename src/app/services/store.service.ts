@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, empty, forkJoin, Observable, switchMap } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { BehaviorSubject, EMPTY, empty, forkJoin, Observable, switchMap } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
 import { EmoteService } from './emote.service';
 import { UiEmote, UiUser } from '../models/models';
 import { TwitchService } from './twitch.service';
@@ -9,7 +9,7 @@ import { TwitchService } from './twitch.service';
   providedIn: 'root',
 })
 export class StoreService {
-  searchTerm$ = new BehaviorSubject<string>('pokelawls');
+  searchTerm$ = new BehaviorSubject<string>('greekgodx');
   private _streamer$ = new BehaviorSubject<UiUser | null>(null);
 
   private emoteMap = new Map<string, UiEmote>();
@@ -33,6 +33,7 @@ export class StoreService {
     this._streamer$
       .pipe(
         filter((user) => user !== null),
+        tap(user => this.connectToChat(user)),
         switchMap((user) => {
           if (user)
             return forkJoin([
@@ -40,11 +41,12 @@ export class StoreService {
               this.emotes.getSevenTv(user?.id),
               this.emotes.getFfz(user.name),
             ]);
-          return empty();
+          return EMPTY;
         })
       )
       .subscribe(([bttv, seventv, ffz]) => {
         console.debug({ bttv, seventv, ffz });
+
         bttv.forEach((emote) => this.emoteMap.set(emote.name, emote));
         ffz.forEach((emote) => this.emoteMap.set(emote.name, emote));
         seventv.forEach((emote) => this.emoteMap.set(emote.name, emote));
@@ -52,6 +54,10 @@ export class StoreService {
         this._emoteMap$.next(this.emoteMap);
         console.debug(this.emoteMap);
       });
+  }
+
+  connectToChat(user: UiUser | null): void {
+    // throw new Error('Method not implemented.');
   }
 
   getEmote(name: string): UiEmote | undefined {

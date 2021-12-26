@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbSearchService } from '@nebular/theme';
-import { StoreService } from './services/store.service';
+import { StoreService } from '../services/store.service';
 
 @Component({
   selector: 'app-pages',

@@ -1,4 +1,8 @@
 <ul>
-  <li *ngFor="let message of messages">{{ message }}</li>
-
+  <div *ngFor="let message of messages" fxLayout="row">
+    <app-emote
+      *ngFor="let emote of getEmotes(message)"
+      [emote]="emote"
+    ></app-emote>
+  </div>
 </ul>
