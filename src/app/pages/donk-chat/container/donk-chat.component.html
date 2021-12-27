@@ -1,0 +1,19 @@
+<ng-container
+  *ngIf="{
+    streamer: store.streamer$ | async,
+    emotes: store.emoteMap$ | async
+  } as data"
+  style="height: 100%"
+>
+  <app-user-card [streamer]="data.streamer"></app-user-card>
+  <ng-container *ngIf="store.emoteMap$ | async as emotes">
+    <app-chat-card
+      [streamer]="data.streamer"
+      [emotes]="data.emotes"
+      [messages]="messages"
+    ></app-chat-card>
+  </ng-container>
+</ng-container>
+
+
+

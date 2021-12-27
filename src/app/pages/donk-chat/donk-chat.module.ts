@@ -1,42 +1,43 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DonkChatRoutingModule } from './donk-chat-routing.module';
-import { DonkChatComponent } from './donk-chat.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { ChatCardComponent } from './components/chat-card/chat-card.component';
+import { DonkChatComponent } from './container/donk-chat.component';
+import { DonkChatRoutingModule } from './donk-chat-routing.module';
+import { EmoteComponent } from './components/emote/emote.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
+
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {
   NbAutocompleteModule,
   NbButtonModule,
   NbCardModule,
   NbFormFieldModule,
   NbInputModule,
-  NbSearchModule,
+  NbListModule,
 } from '@nebular/theme';
-import { UserCardComponent } from './components/user-card/user-card.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { ChatCardComponent } from './components/chat-card/chat-card.component';
-import { EmoteComponent } from './components/emote/emote.component';
 
 @NgModule({
   declarations: [
-    DonkChatComponent,
-    UserCardComponent,
     ChatCardComponent,
+    DonkChatComponent,
     EmoteComponent,
+    UserCardComponent,
   ],
   imports: [
     CommonModule,
     DonkChatRoutingModule,
-    ReactiveFormsModule,
+    FlexLayoutModule,
+    NbAutocompleteModule,
     NbButtonModule,
     NbCardModule,
+    NbEvaIconsModule,
     NbFormFieldModule,
     NbInputModule,
-    FlexLayoutModule,
-    NbSearchModule,
-    NbInputModule,
-    NbAutocompleteModule,
-    NbAutocompleteModule,
+    NbListModule,
+    ReactiveFormsModule,
   ],
 })
 export class DonkChatModule {}

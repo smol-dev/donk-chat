@@ -7,7 +7,7 @@ import { UiUser } from 'src/app/models/models';
   styleUrls: ['./user-card.component.scss'],
 })
 export class UserCardComponent implements OnInit {
-  @Input() streamer?: UiUser;
+  @Input() streamer: UiUser | null = null;
 
   constructor() {}
 

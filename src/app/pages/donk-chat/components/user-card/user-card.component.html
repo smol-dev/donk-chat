@@ -1,8 +1,11 @@
 <main
   fxLayout="row"
-  fxLayoutGap="2rem"
-  [style.background]="'url(' + streamer!.offlinePlaceholderUrl + ')'"
+  fxLayoutAlign="start center"
+  fxLayoutGap.gt-sm="1rem"
+  fxLayout.lt-md="column"
+  fxLayoutAlign.lt-md="space-between center"
 >
+  <!-- [style.background]="'url(' + streamer!.offlinePlaceholderUrl + ')'" -->
   <img [src]="streamer?.profilePictureUrl" />
 
   <h2 fxFlexAlign="center">{{ streamer?.displayName | titlecase }}</h2>

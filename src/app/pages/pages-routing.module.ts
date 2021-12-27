@@ -12,12 +12,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./donk-chat/donk-chat.module').then((m) => m.DonkChatModule),
       },
-
-      // {
-      //   path: '',
-      //   redirectTo: 'donk-chat',
-      //   pathMatch: 'full',
-      // },
+      {
+        path: '',
+        redirectTo: 'donk-chat',
+        pathMatch: 'full',
+      },
       // {
       //   path: '**',
       //   component: NotFoundComponent,

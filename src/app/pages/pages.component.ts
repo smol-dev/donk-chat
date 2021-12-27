@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { NbSearchService } from '@nebular/theme';
-import { StoreService } from '../services/store.service';
 
 @Component({
   selector: 'app-pages',
   template: `
     <nb-layout>
       <nb-layout-header fixed>
-        <nb-actions size="small">
-          <nb-action
-            class="control-item"
-            icon="email-outline"
-            [link]="'donk-chat'"
-          ></nb-action>
-        </nb-actions>
-        <nb-search type="rotate-layout"></nb-search>
+        <div fxLayout="row" fxFill fxLayoutAlign="space-between center">
+          <nb-actions size="small">
+            <nb-action
+              class="control-item"
+              icon="email-outline"
+              [link]="'donk-chat'"
+            ></nb-action>
+          </nb-actions>
+
+          <nb-search type="modal-zoomin"></nb-search>
+        </div>
       </nb-layout-header>
 
       <nb-layout-column>
@@ -35,14 +36,13 @@ export class PagesComponent implements OnInit {
       icon: 'message-circle-outline',
       responsive: true,
     },
+    {
+      title: 'donk-chat',
+      route: '/pages/donk-chat',
+      icon: 'message-circle-outline',
+      responsive: true,
+    },
   ];
-  constructor(private searchService: NbSearchService, store: StoreService) {
-    this.searchService
-      .onSearchSubmit()
-      .subscribe((data: { term: string; tag?: string }) => {
-        store.searchTerm$.next(data.term);
-      });
-  }
 
   ngOnInit(): void {}
 }

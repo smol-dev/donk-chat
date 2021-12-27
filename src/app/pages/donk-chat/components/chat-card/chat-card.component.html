@@ -1,8 +1,16 @@
-<ul>
-  <div *ngFor="let message of messages" fxLayout="row">
-    <app-emote
-      *ngFor="let emote of getEmotes(message)"
-      [emote]="emote"
-    ></app-emote>
-  </div>
-</ul>
+<!-- <div *ngFor="let message of messages" fxLayout="row"> -->
+
+<nb-card>
+  <nb-card-body>
+    <nb-list>
+      <nb-list-item *ngFor="let message of messages.slice(0, 20)">
+        <app-emote
+          *ngFor="let emote of getEmotes(message)"
+          [emote]="emote"
+        ></app-emote>
+      </nb-list-item>
+    </nb-list>
+  </nb-card-body>
+</nb-card>
+
+<!-- </div> -->

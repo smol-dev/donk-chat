@@ -45,14 +45,10 @@ export class StoreService {
         })
       )
       .subscribe(([bttv, seventv, ffz]) => {
-        console.debug({ bttv, seventv, ffz });
-
         bttv.forEach((emote) => this.emoteMap.set(emote.name, emote));
         ffz.forEach((emote) => this.emoteMap.set(emote.name, emote));
         seventv.forEach((emote) => this.emoteMap.set(emote.name, emote));
-
         this._emoteMap$.next(this.emoteMap);
-        console.debug(this.emoteMap);
       });
   }
 
@@ -61,7 +57,6 @@ export class StoreService {
   }
 
   getEmote(name: string): UiEmote | undefined {
-    console.log(name);
     return this.emoteMap.get(name);
   }
 

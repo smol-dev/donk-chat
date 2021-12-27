@@ -45,6 +45,5 @@ export class EmoteComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('emote', this.emote?.name);
   }
 }

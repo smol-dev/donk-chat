@@ -12,8 +12,8 @@ import { UiEmote, UiUser } from 'src/app/models/models';
   styleUrls: ['./chat-card.component.scss'],
 })
 export class ChatCardComponent implements OnInit {
-  @Input() streamer?: UiUser;
-  @Input() emotes?: Map<string, UiEmote>;
+  @Input() streamer: UiUser | null = null;
+  @Input() emotes?: Map<string, UiEmote> | null;
   @Input() messages: string[] = [];
 
   constructor() {}

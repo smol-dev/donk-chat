@@ -1,24 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
+import { PagesRoutingModule } from './pages-routing.module';
+
 import {
   NbActionsModule,
   NbLayoutModule,
-  NbRouteTabsetModule,
   NbSearchModule,
-  NbTableModule,
 } from '@nebular/theme';
 
 @NgModule({
   declarations: [PagesComponent],
   imports: [
-    NbLayoutModule,
-    NbActionsModule,
     CommonModule,
-    PagesRoutingModule,
+    FlexLayoutModule,
+    NbActionsModule,
+    NbLayoutModule,
     NbSearchModule,
+    PagesRoutingModule,
   ],
 })
 export class PagesModule {}

@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NbSearchService } from '@nebular/theme';
 import { ChatClient } from '@twurple/chat';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UiEmote, UiUser } from '../../models/models';
-import { StoreService } from '../../services/store.service';
+import { UiEmote, UiUser } from 'src/app/models/models';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'page-donk-chat',
@@ -18,7 +19,10 @@ export class DonkChatComponent implements OnInit {
   searchEmote = '';
   messages: string[] = [];
 
-  constructor(public store: StoreService) {
+  constructor(
+    public store: StoreService,
+    private searchService: NbSearchService
+  ) {
     this.store.streamer$.subscribe((streamer) => {
       if (streamer?.name) {
         this.chatClient.quit();
@@ -26,6 +30,12 @@ export class DonkChatComponent implements OnInit {
         this.loadChat(streamer);
       }
     });
+
+    this.searchService
+      .onSearchSubmit()
+      .subscribe((data: { term: string; tag?: string }) => {
+        store.searchTerm$.next(data.term);
+      });
   }
 
   private filter(value: string): string[] {
@@ -56,7 +66,6 @@ export class DonkChatComponent implements OnInit {
 
   async loadChat(streamer: UiUser) {
     console.log('loadChat');
-
     if (streamer?.name) {
       this.chatClient = new ChatClient({
         channels: [streamer?.name],
