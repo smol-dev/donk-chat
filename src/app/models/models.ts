@@ -20,3 +20,8 @@ export interface UiEmote {
   type: 'bttv' | 'ffz' | '7tv';
   emote: Emote7Tv | EmoteBTTV | EmoteFFZ;
 }
+
+export interface ChatLog {
+  text: string;
+  emotes: Array<UiEmote>;
+}

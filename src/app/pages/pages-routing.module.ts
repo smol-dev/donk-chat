@@ -8,6 +8,14 @@ const routes: Routes = [
     component: PagesComponent,
     children: [
       {
+        path: 'emote-counter',
+        loadChildren: () =>
+          import('./emote-counter/emote-counter.module').then(
+            (m) => m.EmoteCounterModule
+          ),
+      },
+
+      {
         path: 'donk-chat',
         loadChildren: () =>
           import('./donk-chat/donk-chat.module').then((m) => m.DonkChatModule),

@@ -1,0 +1,7 @@
+<!-- <pre *ngIf="store.series$ | async as data">
+  {{ data | json }}
+</pre> -->
+<main *ngIf="chartOptions">
+  <div echarts [options]="chartOptions" class="demo-chart"></div>
+  <pre>{{ chartOptions | json }}</pre>
+</main>

@@ -7,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
       <nb-layout-header fixed>
         <div fxLayout="row" fxFill fxLayoutAlign="space-between center">
           <nb-actions size="small">
-            <nb-action
+            <nb-action *ngFor="let tab of tabs"
               class="control-item"
-              icon="email-outline"
-              [link]="'donk-chat'"
+              [icon]="tab.icon"
+              [link]="tab.route"
             ></nb-action>
           </nb-actions>
 
@@ -34,13 +34,11 @@ export class PagesComponent implements OnInit {
       title: 'donk-chat',
       route: '/pages/donk-chat',
       icon: 'message-circle-outline',
-      responsive: true,
     },
     {
-      title: 'donk-chat',
-      route: '/pages/donk-chat',
+      title: 'emote-counter',
+      route: '/pages/emote-counter',
       icon: 'message-circle-outline',
-      responsive: true,
     },
   ];
 
