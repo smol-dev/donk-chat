@@ -111,8 +111,8 @@ export class StoreService {
     });
 
     return Array.from(retval.entries())
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 20);
+      // .sort((a, b) => a[1] - b[1])
+      // .slice(0, 20);
   }
 
   strToChatLog(list: string[]): ChatLog[] {
