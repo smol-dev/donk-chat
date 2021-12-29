@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  clientId: 'ti1zdur1zl1qho6j27fctfea04u39k', // todo : revoke
-  clientSecret: 'sopr4t4g8rt3heui6ploici5cz4f82', // todo : revoke
+  clientId: '<bruh>',
+  clientSecret: '<bruh>',
 };
 
 /*
