@@ -8,7 +8,6 @@ import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,11 +20,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
     NbLayoutModule,
     NbEvaIconsModule,
     FlexLayoutModule,
-    NgxEchartsModule.forRoot({
-
-      echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
-    }),
-
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -8,7 +8,14 @@ import {
   Observable,
   switchMap,
 } from 'rxjs';
-import { debounce, filter, map, take, tap, withLatestFrom } from 'rxjs/operators';
+import {
+  debounce,
+  filter,
+  map,
+  take,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { EmoteService } from './emote.service';
 import { ChatLog, UiEmote, UiUser } from '../models/models';
 import { TwitchService } from './twitch.service';
@@ -18,7 +25,7 @@ import { ChatClient } from '@twurple/chat';
   providedIn: 'root',
 })
 export class StoreService {
-  searchTerm$ = new BehaviorSubject<string>('nymn');
+  searchTerm$ = new BehaviorSubject<string>('itssliker');
   private _streamer$ = new BehaviorSubject<UiUser | null>(null);
   private emoteMap = new Map<string, UiEmote>();
   private _emoteMap$ = new BehaviorSubject<Map<string, UiEmote>>(new Map());
@@ -61,9 +68,12 @@ export class StoreService {
       });
 
     this.streamer$.subscribe((streamer) => {
+      // console.log('STREAMEW CHANGE', streamer);
       if (streamer?.name) {
+
         this.chatClient.quit();
         this._messages$.next([]);
+
         this.loadChat(streamer);
       }
     });
@@ -92,13 +102,14 @@ export class StoreService {
   get series$(): Observable<Array<[string, number]>> {
     return this.messages$.pipe(
       debounce(() => interval(500)),
-      map((logs) => this.chatLogsToSeries(logs)));
+      map((logs) => this.chatLogsToSeries(logs))
+    );
   }
 
   chatLogsToSeries(logs: ChatLog[]): Array<[string, number]> {
-    // console.log('logs');
-
+    // console.log('logs', logs);
     const retval = new Map<string, number>();
+    // todo refactor
     logs.forEach((el) => {
       el.emotes.forEach((emote) => {
         const oldCount = retval.get(emote.name);
@@ -109,10 +120,8 @@ export class StoreService {
         }
       });
     });
-
-    return Array.from(retval.entries())
-      // .sort((a, b) => a[1] - b[1])
-      // .slice(0, 20);
+    return Array.from(retval.entries()).sort((a, b) => b[1] - a[1]);
+    // .slice(0, 20);
   }
 
   strToChatLog(list: string[]): ChatLog[] {
@@ -127,8 +136,8 @@ export class StoreService {
       .map((word) => this.emoteMap?.get(word)!);
   }
 
-  getEmote(name: string): UiEmote | undefined {
-    return this.emoteMap.get(name);
+  getEmote(name: string): UiEmote {
+    return this.emoteMap.get(name) ?? ({} as UiEmote);
   }
 
   get emoteList(): string[] {

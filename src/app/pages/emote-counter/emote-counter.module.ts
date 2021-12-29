@@ -3,14 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { EmoteCounterRoutingModule } from './emote-counter-routing.module';
 import { EmoteCounterComponent } from './container/emote-counter.component';
-import { NgxEchartsModule } from 'ngx-echarts';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [EmoteCounterComponent],
   imports: [
     CommonModule,
     EmoteCounterRoutingModule,
-    NgxEchartsModule.forChild(),
+    NgxChartsModule,
   ],
 })
 export class EmoteCounterModule {}

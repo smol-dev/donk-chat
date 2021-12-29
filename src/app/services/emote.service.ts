@@ -15,8 +15,7 @@ export const SEVENTV_URL = 'https://api.7tv.app/v2';
   providedIn: 'root',
 })
 export class EmoteService {
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getFfz(channel: string): Observable<UiEmote[]> {
     return this.http.get<FFZResponse>(`${FFZ_URL}/room/${channel}`).pipe(

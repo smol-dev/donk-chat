@@ -1,7 +1,7 @@
 <!-- <pre *ngIf="store.series$ | async as data">
   {{ data | json }}
 </pre> -->
-<main *ngIf="chartOptions">
+<!-- <main *ngIf="chartOptions">
   <div
   style="width: 100%; height: 100%;"
     echarts
@@ -9,4 +9,19 @@
     [options]="chartOptions"
     class="demo-chart"
   ></div>
-</main>
+</main> -->
+<div
+  fxFlex="fill"
+  #container
+  style="height: 80vh; border: 1px violet; background-color: tomato"
+>
+  <ngx-charts-tree-map
+    *ngIf="series"
+    [view]="view"
+    [results]="series"
+    [animations]="animations"
+    [labelFormatting]="labelFormatting"
+    (select)="onSelect($event)"
+  >
+  </ngx-charts-tree-map>
+</div>
