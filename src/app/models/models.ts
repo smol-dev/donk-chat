@@ -19,4 +19,5 @@ export interface UiEmote {
   name: string;
   type: 'bttv' | 'ffz' | '7tv';
   emote: Emote7Tv | EmoteBTTV | EmoteFFZ;
+  startIndex?: number
 }

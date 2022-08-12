@@ -5,18 +5,20 @@ import { map } from 'rxjs/operators';
 import { ClientCredentialsAuthProvider } from '@twurple/auth';
 import { ApiClient, HelixUser } from '@twurple/api';
 import { UiUser } from '../models/models';
-
-const clientId = 'ti1zdur1zl1qho6j27fctfea04u39k';
-const clientSecret = 'sopr4t4g8rt3heui6ploici5cz4f82';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TwitchService {
-  authProvider = new ClientCredentialsAuthProvider(clientId, clientSecret);
   apiClient: ApiClient;
+  authProvider: ClientCredentialsAuthProvider;
 
   constructor() {
+    this.authProvider = new ClientCredentialsAuthProvider(
+      environment.clientId,
+      environment.clientSecret
+    );
     this.apiClient = new ApiClient({ authProvider: this.authProvider });
   }
 

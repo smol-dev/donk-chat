@@ -9,7 +9,7 @@ import { TwitchService } from './twitch.service';
   providedIn: 'root',
 })
 export class StoreService {
-  searchTerm$ = new BehaviorSubject<string>('greekgodx');
+  searchTerm$ = new BehaviorSubject<string>('nymn');
   private _streamer$ = new BehaviorSubject<UiUser | null>(null);
 
   private emoteMap = new Map<string, UiEmote>();

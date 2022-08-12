@@ -25,8 +25,6 @@ export class DonkChatComponent implements OnInit {
   ) {
     this.store.streamer$.subscribe((streamer) => {
       if (streamer?.name) {
-        this.chatClient.quit();
-        this.messages = [];
         this.loadChat(streamer);
       }
     });
@@ -65,6 +63,8 @@ export class DonkChatComponent implements OnInit {
   ngOnInit() {}
 
   async loadChat(streamer: UiUser) {
+    this.chatClient.quit();
+    this.messages = [];
     console.log('loadChat');
     if (streamer?.name) {
       this.chatClient = new ChatClient({
@@ -74,6 +74,7 @@ export class DonkChatComponent implements OnInit {
     await this.chatClient.connect();
 
     this.chatClient.onMessage((channel, user, message) => {
+      console.log(message);
       this.messages = [message, ...this.messages];
     });
   }
